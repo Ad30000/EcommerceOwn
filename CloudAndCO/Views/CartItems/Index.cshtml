@@ -1,0 +1,80 @@
+﻿@model IEnumerable<CloudAndCO.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+    Layout = "_Layout";
+}
+
+<h1>Shopping Cart</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        <h4>Your cart is empty!</h4>
+        <p>Start shopping by browsing our <a asp-controller="Products" asp-action="Index">products</a>.</p>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@item.Product?.Name</strong><br>
+                                <small class="text-muted">@item.Product?.Category</small>
+                            </td>
+                            <td>R @(item.Product?.Price ?? 0)</td>
+                            <td>@item.Quantity</td>
+                            <td>R @(item.Quantity * (item.Product?.Price ?? 0))</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.CartItemId" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@item.CartItemId" class="btn btn-sm btn-outline-danger">Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    @{
+                        var subtotal = Model.Sum(item => item.Quantity * (item.Product?.Price ?? 0));
+                    }
+                    <p><strong>Subtotal: R @subtotal</strong></p>
+                    <p><small class="text-muted">Tax and shipping calculated at checkout</small></p>
+
+                    <form asp-action="ProcessOrder" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-success btn-lg w-100">
+                            <i class="fas fa-shopping-bag"></i> Place Order
+                        </button>
+                    </form>
+
+                    <div class="mt-3">
+                        <a asp-controller="Products" asp-action="Index" class="btn btn-outline-secondary w-100">
+                            Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

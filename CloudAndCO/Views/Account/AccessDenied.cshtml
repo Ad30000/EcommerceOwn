@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Access Denied";
+    Layout = "_Layout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card mt-5">
+            <div class="card-header bg-danger text-white">
+                <h2 class="text-center">Access Denied</h2>
+            </div>
+            <div class="card-body text-center">
+                <i class="fas fa-exclamation-triangle fa-4x text-danger mb-3"></i>
+                <h4>You don't have permission to access this page.</h4>
+                <p class="text-muted">Please contact an administrator if you believe this is an error.</p>
+                <a asp-action="Index" asp-controller="Home" class="btn btn-primary mt-3">Return to Home</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿@* @{
+    ViewData["Title"] = "Register";
+    Layout = "_Layout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card mt-5">
+            <div class="card-header">
+                <h2 class="text-center">Create Account</h2>
+            </div>
+            <div class="card-body">
+                <form asp-action="Register" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required
+                               placeholder="Choose a username">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required
+                               placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required
+                               placeholder="Create a password">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required
+                               placeholder="Confirm your password">
+                    </div>
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        </div>
+                    }
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">Register</button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-3">
+                    <p>Already have an account? <a asp-action="Login">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> *@
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_Layout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card mt-5">
+            <div class="card-header">
+                <h2 class="text-center">Create Account</h2>
+            </div>
+            <div class="card-body">
+                <form asp-action="Register" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required
+                               placeholder="Choose a username">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required
+                               placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required
+                               placeholder="Create a password">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required
+                               placeholder="Confirm your password">
+                    </div>
+
+                    <!-- ADD THE HIDDEN FIELD HERE -->
+                    <input type="hidden" name="role" value="Customer" />
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        </div>
+                    }
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">Register</button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-3">
+                    <p>Already have an account? <a asp-action="Login">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

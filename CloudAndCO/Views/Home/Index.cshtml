@@ -1,0 +1,269 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 100px 0;
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .display-4 {
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+    }
+
+    .assignment-section {
+        padding: 60px 0;
+        background: #f8f9fa;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin: 20px 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: #667eea;
+    }
+
+    .tech-stack {
+        background: white;
+        border-radius: 15px;
+        padding: 40px;
+        margin: 40px 0;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .tech-item {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+        .tech-item:hover {
+            background-color: #f8f9fa;
+        }
+
+    .tech-icon {
+        font-size: 2rem;
+        margin-right: 15px;
+        color: #667eea;
+    }
+
+    .btn-custom {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+    .section-title {
+        color: #2c3e50;
+        font-weight: 700;
+        margin-bottom: 30px;
+        position: relative;
+    }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+</style>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="display-4">CloudAndCO Retail System</h1>
+            <p class="hero-subtitle">Azure Cloud Development Portfolio of Evidence</p>
+            <p class="lead">A comprehensive e-commerce platform built with ASP.NET Core and Microsoft Azure Cloud Services</p>
+            <a href="#assignment" class="btn btn-light btn-lg mt-3">Learn About the Project</a>
+        </div>
+    </div>
+</section>
+
+<!-- Assignment Overview Section -->
+<section id="assignment" class="assignment-section">
+    <div class="container">
+        <h2 class="section-title text-center">Project Overview</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Business Context</h3>
+                    <p>ABC Retail is migrating from legacy on-premises infrastructure to a scalable Azure cloud solution. The current system struggles with peak season loads, slow image access, and unreliable message queuing.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Project Objectives</h3>
+                    <p>Develop a cloud-native e-commerce platform using Azure services to handle order processing, data storage, real-time event processing, and reliable message queuing with scalability and cost-effectiveness.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- POE Parts Summary -->
+        <div class="tech-stack">
+            <h3 class="text-center mb-4">Portfolio of Evidence Structure</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="tech-item">
+                        <div class="tech-icon">1️⃣</div>
+                        <div>
+                            <h5>Part 1: Azure Storage</h5>
+                            <p class="mb-0">Implement Azure Tables, Blob Storage, Queues, and Files</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tech-item">
+                        <div class="tech-icon">2️⃣</div>
+                        <div>
+                            <h5>Part 2: Azure Integration</h5>
+                            <p class="mb-0">Azure Functions, Event Hubs, and Service Bus integration</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tech-item">
+                        <div class="tech-icon">3️⃣</div>
+                        <div>
+                            <h5>Part 3: Advanced Features</h5>
+                            <p class="mb-0">SQL Database, replication, and comprehensive documentation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <h4>🛒 E-commerce Features</h4>
+                    <ul class="list-unstyled">
+                        <li>✓ Product Catalog</li>
+                        <li>✓ Shopping Cart</li>
+                        <li>✓ Order Management</li>
+                        <li>✓ Customer Profiles</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <h4>☁️ Azure Services</h4>
+                    <ul class="list-unstyled">
+                        <li>✓ Azure App Service</li>
+                        <li>✓ Azure SQL Database</li>
+                        <li>✓ Blob Storage</li>
+                        <li>✓ Azure Functions</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <h4>👥 User Management</h4>
+                    <ul class="list-unstyled">
+                        <li>✓ Customer Registration</li>
+                        <li>✓ Admin Dashboard</li>
+                        <li>✓ Role-based Access</li>
+                        <li>✓ Session Management</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="text-center mt-5">
+            <h4>Ready to Explore?</h4>
+            <p>Browse our products, create an account, or experience the admin dashboard</p>
+            <div class="mt-4">
+                <a asp-controller="Products" asp-action="Index" class="btn btn-custom me-3">Browse Products</a>
+                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary">Get Started</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Note -->
+<div class="bg-dark text-white text-center py-3">
+    <div class="container">
+        <p class="mb-0">CLDV6212 - Cloud Development B | Portfolio of Evidence Submission</p>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+}

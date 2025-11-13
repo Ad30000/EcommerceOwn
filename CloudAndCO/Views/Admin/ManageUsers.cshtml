@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CloudAndCO.Models.User>
+@{
+    ViewData["Title"] = "Manage Users";
+    Layout = "_Layout";
+}
+
+<h1>Manage Users</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Date Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserId</td>
+                <td>@user.Username</td>
+                <td>
+                    <span class="badge @(user.Role == "Admin" ? "bg-danger" : "bg-success")">
+                        @user.Role
+                    </span>
+                </td>
+                <td>@user.DateCreated?.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    </tbody>
+</table>

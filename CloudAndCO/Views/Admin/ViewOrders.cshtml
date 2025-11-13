@@ -1,0 +1,121 @@
+﻿@* @model IEnumerable<CloudAndCO.Models.Order>   
+
+@{
+    ViewData["Title"] = "View Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml"; <!-- Adjust if you use a different layout -->
+}
+
+<div class="container">
+    <h2>All Orders</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Order Date</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.OrderId</td>
+                        <td>@order.CustomerId</td>
+                        <td>@order.OrderDate.ToString("yyyy-MM-dd")</td>
+                        <td>@order.TotalAmount.ToString("C")</td>
+                        <td>@order.Status</td>
+                        <td>
+                            <a href="@Url.Action("OrderDetails", "Admin", new { id = order.OrderId })" class="btn btn-info btn-sm">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <p>No orders found.</p>
+        </div>
+    }
+</div> *@
+
+@model IEnumerable<CloudAndCO.Models.Order>
+
+@{
+    ViewData["Title"] = "View Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>All Orders</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Order Date</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.OrderId</td>
+                        <td>@order.Customer?.Name @order.Customer?</td>
+                        <td>@order.OrderDate.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@order.TotalAmount.ToString("C")</td>
+                        <td>
+                            <span class="badge badge-@(order.Status == "PROCESSED" ? "success" :
+                                                                                    order.Status == "PENDING" ? "warning" :
+                                                                                    order.Status == "CANCELLED" ? "danger" : "info")">
+                        @order.Status
+                    </span>
+                </td>
+                <td>
+                    <a href="@Url.Action("OrderDetails", "Admin", new { id = order.OrderId })"
+                       class="btn btn-info btn-sm">Details</a>
+
+                    @if (order.Status != "PROCESSED")
+                            {
+                                <a href="@Url.Action("MarkAsProcessed", "Admin", new { id = order.OrderId })"
+                                   class="btn btn-success btn-sm"
+                                   onclick="return confirm('Mark order #@order.OrderId as PROCESSED?')">
+                                    Mark Processed
+                                </a>
+                            }
+
+                            <a href="@Url.Action("UpdateOrderStatus", "Admin", new { id = order.OrderId })"
+                               class="btn btn-warning btn-sm">Update Status</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <p>No orders found.</p>
+        </div>
+    }
+</div>

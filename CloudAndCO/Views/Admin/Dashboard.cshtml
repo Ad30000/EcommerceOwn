@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid">
+    <h1>Admin Dashboard</h1>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Users</h5>
+                    <p class="card-text display-4">@ViewBag.TotalUsers</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Customers</h5>
+                    <p class="card-text display-4">@ViewBag.TotalCustomers</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Products</h5>
+                    <p class="card-text display-4">@ViewBag.TotalProducts</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Orders</h5>
+                    <p class="card-text display-4">@ViewBag.TotalOrders</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Recent Orders</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        @foreach (var order in ViewBag.RecentOrders)
+                        {
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Order #@order.OrderId - @order.Customer.Name</h6>
+                                    <span class="badge bg-primary">@order.Status</span>
+                                </div>
+                                <p class="mb-1">Total: R @order.TotalAmount</p>
+                                <small>Order Date: @order.OrderDate?.ToString("f")</small>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <a asp-controller="Products" asp-action="Create" class="btn btn-primary">Add New Product</a>
+                    <a asp-action="ManageUsers" class="btn btn-secondary">Manage Users</a>
+                    <a asp-action="ViewOrders" class="btn btn-info">View All Orders</a>
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-success">Manage Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

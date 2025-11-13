@@ -1,0 +1,68 @@
+﻿@model CloudAndCO.Models.Order
+
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            <h2 class="mb-0"><i class="bi bi-check-circle"></i> Order Confirmed!</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Order Details</h4>
+                    <p><strong>Order #:</strong> @Model.OrderId</p>
+                    <p><strong>Order Date:</strong> @Model.OrderDate.ToString("f")</p>
+                    <p><strong>Status:</strong> <span class="badge bg-info">@Model.Status</span></p>
+                    <p><strong>Total Amount:</strong> R @Model.TotalAmount</p>
+                </div>
+                <div class="col-md-6">
+                    <h4>Customer Information</h4>
+                    <p><strong>Name:</strong> @Model.Customer.Name</p>
+                    <p><strong>Email:</strong> @Model.Customer.Email</p>
+                    <p><strong>Phone:</strong> @(Model.Customer.Phone ?? "Not provided")</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <h4>Order Items</h4>
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderItems)
+                    {
+                        <tr>
+                            <td>@item.Product.Name</td>
+                            <td>@item.Quantity</td>
+                            <td>R @item.UnitPrice</td>
+                            <td>R @(item.Quantity* item.UnitPrice)</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot class="table-active">
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Grand Total:</strong></td>
+                        <td><strong>R @Model.TotalAmount</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div class="text-center mt-4">
+                <a asp-controller="Orders" asp-action="Details" asp-route-id="@Model.OrderId"
+                   class="btn btn-primary">View Order Details</a>
+                <a asp-controller="Products" asp-action="Index" class="btn btn-outline-primary">Continue Shopping</a>
+                <a asp-controller="Orders" asp-action="Index" class="btn btn-outline-secondary">View All Orders</a>
+            </div>
+        </div>
+    </div>
+</div>

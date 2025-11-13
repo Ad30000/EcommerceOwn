@@ -1,0 +1,160 @@
+﻿@* @model IEnumerable<CloudAndCO.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockqUantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td> *@
+            @* <td>
+                @Html.DisplayFor(modelItem => item.ImageUrl)
+            </td> *@
+            <td>
+               @*  @if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                    <img src="@item.ImageUrl" width="50" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockqUantity)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table> *@
+
+@model IEnumerable<CloudAndCO.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+    <h1>Products</h1>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@item.ImageUrl" class="card-img-top" alt="@item.Name" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Category</p>
+                        <p class="card-text"><strong>R @item.Price</strong></p>
+                        <p class="card-text">In stock: @item.StockqUantity</p>
+
+                        <form asp-controller="CartItems" asp-action="AddToCart" method="post">
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <div class="input-group mb-3">
+                                <button type="button" class="btn btn-outline-danger minus-btn fw-bold fs-5 px-3" onclick="decrementQuantity(this)">−</button>
+                                <input type="number" name="quantity" value="0" min="0" max="@item.StockqUantity" class="form-control quantity-input text-center fw-bold fs-5" readonly>
+                                <button type="button" class="btn btn-outline-success plus-btn fw-bold fs-5 px-3" onclick="incrementQuantity(this)">+</button>
+                                <button type="submit" class="btn btn-primary ms-2 fw-bold">Add to Cart</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+@section Scripts {
+        <script>
+            function incrementQuantity(button) {
+                const input = button.parentElement.querySelector('.quantity-input');
+                const max = parseInt(input.getAttribute('max'));
+                let currentValue = parseInt(input.value) || 0;
+
+                if (currentValue < max) {
+                    input.value = currentValue + 1;
+                }
+            }
+
+            function decrementQuantity(button) {
+                const input = button.parentElement.querySelector('.quantity-input');
+                const min = parseInt(input.getAttribute('min'));
+                let currentValue = parseInt(input.value) || 0;
+
+                if (currentValue > min) {
+                    input.value = currentValue - 1;
+                }
+            }
+        </script>
+
+        <style>
+            .plus-btn, .minus-btn {
+                font-weight: 900 !important;
+                font-size: 1.25rem !important;
+                min-width: 45px;
+                border-width: 2px;
+            }
+
+            .quantity-input {
+                font-weight: 700;
+                font-size: 1.1rem;
+                border-left: none;
+                border-right: none;
+            }
+
+            .input-group .btn {
+                transition: all 0.2s ease-in-out;
+            }
+
+                .input-group .btn:hover {
+                    transform: scale(1.05);
+                }
+
+            /* Remove spinner arrows from number input */
+            .quantity-input::-webkit-outer-spin-button,
+            .quantity-input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            .quantity-input {
+                -moz-appearance: textfield;
+            }
+        </style>
+}
+
