@@ -1,5 +1,6 @@
 ﻿
 using System.Data;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using CloudAndCO.DB;
@@ -176,7 +177,7 @@ namespace CloudAndCO.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(string username, string password, string confirmPassword, string email, string role = "Customer")
+        public async Task<IActionResult> Register(string username, string password, string confirmPassword, string email, string Phone, string Address, string role = "Customer")
         {
             if (password != confirmPassword)
             {
@@ -219,8 +220,8 @@ namespace CloudAndCO.Controllers
                 UserId = user.UserId,
                 Name = username,
                 Email = email,
-                Phone = "",
-                Address = ""
+                Phone = Phone ?? "",        // Use the Phone from form
+                Address = Address ?? ""
             };
 
             _context.Customers.Add(customer);
