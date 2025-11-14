@@ -7,6 +7,7 @@ namespace CloudAndCO
 {
     public class Program
     {
+        // Main entry point of the application
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -71,3 +72,13 @@ namespace CloudAndCO
         }
     }
 }
+
+
+/*Part 3 Referencing
+ * Author: Programming place
+ * Year: 2024
+ * Title of video: ASP.NET Core 8 MVC eCommerce Project: Building the Shopping Cart | Part 5
+ * Available at:https://www.youtube.com/playlist?list=PL_FBNdmhDKjJzXQUEAHVtlUTAzSRzTIfe
+ * Accessed: 7 November 2025
+ */
+

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CloudAndCO.DB;
 
+// Context class for CloudAndCo database
 public partial class CloudAndCoContext : DbContext
 {
     public CloudAndCoContext()

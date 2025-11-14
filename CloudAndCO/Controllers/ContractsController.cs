@@ -10,6 +10,7 @@ using CloudAndCO.Models;
 
 namespace CloudAndCO.Controllers
 {
+    // Controller for managing Contracts
     public class ContractsController : Controller
     {
         private readonly CloudAndCoContext _context;

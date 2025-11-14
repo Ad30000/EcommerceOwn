@@ -2,6 +2,7 @@
 
 namespace CloudAndCO.Services
 {
+    // Interface for BlobService
     public interface IBlobService
     {
         Task<string> UploadFileAsync(IFormFile file);

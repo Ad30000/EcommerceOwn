@@ -90,6 +90,7 @@ using CloudAndCO.Models;
 
 namespace CloudAndCO.Controllers
 {
+    // Controller for admin-specific actions like managing users, products, and orders
     public class AdminController : Controller
     {
         private readonly CloudAndCoContext _context;
@@ -209,35 +210,35 @@ namespace CloudAndCO.Controllers
         }
 
         [HttpPost]
-public async Task<IActionResult> UpdateOrderStatus(int orderId, string status)
-{
-    var userRole = HttpContext.Session.GetString("UserRole");
-    if (userRole != "Admin")
-    {
-        return RedirectToAction("AccessDenied", "Account");
-    }
-
-    var order = await _context.Orders.FindAsync(orderId);
-    if (order != null)
-    {
-        // Map to valid status values based on your CHECK constraint
-        var validStatus = status.ToUpper() switch
+        public async Task<IActionResult> UpdateOrderStatus(int orderId, string status)
         {
-            "PENDING" => "PENDING",
-            "PROCESSED" => "PROCESSED", 
-            "SHIPPED" => "SHIPPED",
-            "DELIVERED" => "DELIVERED",
-            "CANCELLED" => "CANCELLED",
-            _ => "PENDING"
-        };
-        
-        order.Status = validStatus;
-        await _context.SaveChangesAsync();
-        TempData["SuccessMessage"] = $"Order #{orderId} status updated to {validStatus}";
-    }
+            var userRole = HttpContext.Session.GetString("UserRole");
+            if (userRole != "Admin")
+            {
+                return RedirectToAction("AccessDenied", "Account");
+            }
 
-    return RedirectToAction("ViewOrders");
-}
+            var order = await _context.Orders.FindAsync(orderId);
+            if (order != null)
+            {
+                // Map to valid status values based on your CHECK constraint
+                var validStatus = status.ToUpper() switch
+                {
+                    "PENDING" => "PENDING",
+                    "PROCESSED" => "PROCESSED",
+                    "SHIPPED" => "SHIPPED",
+                    "DELIVERED" => "DELIVERED",
+                    "CANCELLED" => "CANCELLED",
+                    _ => "PENDING"
+                };
+
+                order.Status = validStatus;
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = $"Order #{orderId} status updated to {validStatus}";
+            }
+
+            return RedirectToAction("ViewOrders");
+        }
 
         public async Task<IActionResult> MarkAsProcessed(int id)
         {
@@ -255,5 +256,49 @@ public async Task<IActionResult> UpdateOrderStatus(int orderId, string status)
             TempData["SuccessMessage"] = $"Order #{order.OrderId} has been processed successfully!";
             return RedirectToAction(nameof(ViewOrders));
         }
+
+        public async Task<IActionResult> MarkAsShipped(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            order.Status = "SHIPPED";
+            _context.Update(order);
+            await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = $"Order #{order.OrderId} has been marked as shipped!";
+            return RedirectToAction(nameof(ViewOrders));
+        }
+
+        public async Task<IActionResult> MarkAsDelivered(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            order.Status = "DELIVERED";
+            _context.Update(order);
+            await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = $"Order #{order.OrderId} has been marked as delivered!";
+            return RedirectToAction(nameof(ViewOrders));
+
+        }
+
+        public async Task<IActionResult> CancelOrder(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            order.Status = "CANCELLED";
+            _context.Update(order);
+            await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = $"Order #{order.OrderId} has been cancelled!";
+            return RedirectToAction(nameof(ViewOrders));
+        }
     }
+
 }

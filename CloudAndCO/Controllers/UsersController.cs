@@ -10,6 +10,7 @@ using CloudAndCO.Models;
 
 namespace CloudAndCO.Controllers
 {
+    // Controller for managing Users
     public class UsersController : Controller
     {
         private readonly CloudAndCoContext _context;

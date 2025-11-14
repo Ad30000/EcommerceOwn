@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace CloudAndCO.Services
 {
+    // Service for handling Azure Blob Storage operations
     public class BlobService : IBlobService
     {
         private readonly BlobServiceClient _blobServiceClient;

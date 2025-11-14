@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CloudAndCO.Models
 {
-    
+    // Controller for managing Orders
     public class OrdersController : Controller
     {
         private readonly CloudAndCoContext _context;

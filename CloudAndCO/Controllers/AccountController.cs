@@ -1,46 +1,4 @@
-﻿//using CloudAndCO.DB;
-//using Microsoft.AspNetCore.Mvc;
-
-//namespace CloudAndCO.Controllers
-//{
-//    public class AccountController : Controller
-//    {
-//        private readonly CloudAndCoContext _context;
-//        public AccountController(CloudAndCoContext context)
-//        {
-//            _context = context;
-//        }
-
-//        [HttpGet]
-//        public IActionResult Login()
-//        {
-//            return View();
-//        }
-
-//        [HttpPost]
-//        public IActionResult Login(string username, string password)
-//        {
-//            // Placeholder for authentication logic
-//            var user = _context.Users.FirstOrDefault(u => u.Username == username && u.PasswordHash == password);
-//            if (user != null)
-//            {
-//                // Logic for successful login (e.g., setting cookies, session, etc.)
-//                return RedirectToAction("Index", "Home");
-//            }
-//            ModelState.AddModelError("", "Invalid username or password");
-//            return View();
-//        }
-
-//        public IActionResult Logout()
-//        {
-//            // Placeholder for logout logic (e.g., clearing cookies, session, etc.)
-//            return RedirectToAction("Login");
-//        }
-
-
-//    }
-//}
-
+﻿
 using System.Data;
 using System.Security.Cryptography;
 using System.Text;
@@ -51,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CloudAndCO.Controllers
 {
+    // Controller for handling user account actions like login, registration, and logout
     public class AccountController : Controller
     {
         private readonly CloudAndCoContext _context;
@@ -240,7 +199,7 @@ namespace CloudAndCO.Controllers
                     ModelState.AddModelError("", "Invalid role specified");
                     return View();
             }
-            // Removed the check for 'role' since it does not exist in the method parameters or context
+            
 
             // Create new user
             var user = new User

@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CloudAndCO.Controllers
 {
+    // Controller for managing cart items
     [Route("[controller]")]
     public class CartItemsController : Controller
     {

@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CloudAndCO.Controllers
 {
-
+    // Controller for managing Products
     public class ProductsController : Controller
     {
 
